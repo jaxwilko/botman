@@ -49,14 +49,22 @@ class QuestionTest extends TestCase
     public function it_can_add_a_callback_id()
     {
         $message = Question::create('foo')->callbackId('callback');
-        $this->assertArraySubset(['callback_id' => 'callback'], $message->toArray());
+        $result = $message->toArray();
+        foreach (['callback_id' => 'callback'] as $key => $value) {
+            $this->assertArrayHasKey($key, $result);
+            $this->assertSame($value, $result[$key]);
+        }
     }
 
     /** @test */
     public function it_can_add_a_fallback()
     {
         $message = Question::create('foo')->fallback('fallback');
-        $this->assertArraySubset(['fallback' => 'fallback'], $message->toArray());
+        $result = $message->toArray();
+        foreach (['fallback' => 'fallback'] as $key => $value) {
+            $this->assertArrayHasKey($key, $result);
+            $this->assertSame($value, $result[$key]);
+        }
     }
 
     /** @test */
